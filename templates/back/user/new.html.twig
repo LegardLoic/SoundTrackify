@@ -1,0 +1,20 @@
+{% extends 'back/base_back.html.twig' %}
+{% block title %}Créer un utilisateur{% endblock %}
+{% block body %}
+    <div class="container-fluid py-4">
+        <div class="row min-vh-80">
+            <div class="col-xl-7 col-md-8 col-sm-8 mx-auto">
+                <div class="card mt-4">
+                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                            <h2 class="text-white text-capitalize ps-3">Créer un utilisateur</h2>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        {{ include('back/user/_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'front/base_front.html.twig' %}
+{% block title %}Résultat de recherche{% endblock %}
+{% block body %}
+    </header>
+    <main>
+        <h2 class="search-container__title">Votre recherche pour "{{query}}"</h2>
+        <div class="playlist-player mb-3 mt-1">
+            <audio id="player" controls class="playlist-player__item">
+                <source id="audioSource" src="" type="audio/mp3">
+                    Votre navigateur ne prend pas en charge l'élément audio.
+            </audio>
+            <div id="scrollable" class="scroll-text-list">
+                <p id="nowPlaying" class="list__now-playing-search mb-5"><span id="trackName"></span></p>
+            </div>
+        </div> 
+        <section class="card-section section-padding">
+            <div class="card-section__items col-lg-8 col-12 mt-3 mx-auto">
+                {% for index, album in albums %}
+                    <div class="list-block custom-block custom-block-topics-listing bg-white shadow-lg mb-5">
+                        <div class="d-flex">
+                            <div class="list-card__item album-list__player">
+                                <button class="play-button list-play__button" data-url="{{ album.mainThemeUrl }}" data-name="{{ album.musics[0].name }} | album : {{ album.name }}">
+                                    <img src="{{ asset('img/play-list.svg') }}" alt="add music to playlist button" class="album-list__button">
+                                    <img src="{{ album.poster }}" class="list-img list-card__img custom-block-image img-fluid" alt="jacquette de {{ album.name }}">
+                                </button>
+                            </div>
+                            <a href="{{ path('album_show', {slug: album.slug}) }}" class="more"> 
+                                <div class="list-block__container custom-block-topics-listing-info d-flex">
+                                    <div class="list-item__description">
+                                        <h3 class="mb-2">{{ album.name }}</h3>
+                                        <p class="mb-0">
+                                            <i class="music-name_addtrack">Année : {{ album.releaseDate|date('Y') }} </i>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+{% endblock %}
+{% block scrollup %}
+    <a href="#header">
+        <img src="{{ asset('img/scroll-up.png') }}" alt="scroll up btn" class="scroll-up" width="40px" height="40px">
+    </a>
+{% endblock %}
+{% block script %}
+    <script src="{{asset('js/mp3-player-without-button.js')}}"></script>
+    <script src="{{asset('js/mp3-player-text.js')}}"></script>
+{% endblock %}

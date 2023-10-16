@@ -1,0 +1,46 @@
+{{ form_start(form) }}
+    <div class="my-4">
+        <div class="input-group input-group-outline my-2 is-filled">
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+            {{ form_errors(form.name) }}
+        </div>
+        <p class="form-text mb-0 help-text">{{ form_help(form.name) }}</p>
+    </div>
+    <div class="my-4">
+        <div class="input-group input-group-date input-group-outline my-2 is-filled">
+            {{ form_label(form.time) }}
+            {{ form_widget(form.time) }}
+            {{ form_errors(form.time) }}
+        </div>
+        <p class="form-text mb-0 help-text">{{ form_help(form.time) }}</p>
+    </div>
+    <div class="my-4">
+        <div class="input-group input-group-outline my-2 is-filled">
+            {{ form_label(form.link) }}
+            {{ form_widget(form.link) }}
+            {{ form_errors(form.link) }}
+        </div>
+        <p class="form-text mb-0 help-text">{{ form_help(form.link) }}</p>
+    </div>
+    <div class="my-4">
+        <div class="input-group input-group-outline my-2 is-filled">
+            {{ form_label(form.album) }}
+            {{ form_widget(form.album) }}
+            {{ form_errors(form.album) }}
+        </div>
+        <p class="form-text mb-0 help-text">{{ form_help(form.album) }}</p>
+    </div>
+    <div class="my-4">
+        <div class="input-group input-group-outline my-2 is-filled">
+            {{ form_label(form.playlists) }}
+            {{ form_widget(form.playlists) }}
+            {{ form_errors(form.playlists) }}
+        </div>
+        <p class="form-text mb-0 help-text">{{ form_help(form.playlists) }}</p>
+    </div>
+    <div class="edit-button">
+        <button class="btn btn-outline-primary">{{ button_label|default('Save') }}</button>
+        <a href="{{ path('app_back_music_index') }}" class="btn btn-outline-primary">retour à la liste</a>
+    </div>
+{{ form_end(form) }}

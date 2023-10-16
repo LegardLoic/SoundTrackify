@@ -1,0 +1,73 @@
+{% extends 'front/base_front.html.twig' %}
+{% block title %}{{ videogame.name }}{% endblock %}
+{% block body %}
+    </header>
+    <main>
+        <div class="container bg-lighttt pt-5">
+            <div class="row row-custom">
+                <div class="col-lg-9 col-md-12">
+                    <div class="detail-block row g-0 borderrr rrrounded overflow-hidden flex-md-row align-items-start mb-4 shadow-smmm position-relative">
+                        <div class="col-4 movie__poster img-thumbnail detail-img__block" style="background-image: url();">
+                            <img src="{{ videogame.poster }}" class="img-fluid detail-img__item" alt="Jacquette de {{ videogame.name }}">
+                        </div>
+                        <div class="detail-block__content">
+                            <h2>{{ videogame.name }}</h2>
+                            <h3> Année de sortie : {{ videogame.releaseDate|date('Y') }}</h3>
+                            <div class="platform-icon-container px-2">
+                                {% for platform in videogame.platforms %}
+                                    <img class="platform-icon" src="{{ platform.poster }}" alt="{{ platform.name }}">   
+                                {% endfor %}
+                            </div>
+                            <br> 
+                            <p>{{ videogame.resume }}</p>
+                        </div>
+                        <section class="detail-game__albums newest-games card-section card-section__margin">
+                            <h3>Les albums du jeu</h3>
+                            <div class="card-section__items">
+                                {% for album in videogame.albums %}
+                                    <div class="list-block videogame-album__block custom-block custom-block-topics-listing bg-white shadow-lg mb-5">
+                                        <a href="{{ path('album_show', {slug: album.slug}) }}" class="more"> 
+                                            <div class="d-flex">
+                                                <div class="list-card__item">
+                                                    <img src="{{ album.poster }}" class="list-img list-card__img custom-block-image img-fluid" alt="jacquette de {{ album.name }}">
+                                                </div>
+                                                <div class="list-block__container custom-block-topics-listing-info d-flex">
+                                                    <div class="list-item__description">
+                                                        <h4>{{ album.name }}</h4>
+                                                        <p class="mb-0">Année : {{ album.releaseDate|date('Y') }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </section>
+                    </div>
+                </div>
+        <aside class="col-lg-3 col-md-12 playlist-block">
+                <!-- emmet : (div.card.mb-4>div.card-header+ul.list-group.list-group-flush>li.list-group-item*4>a)*2 -->
+            <div class="card mb-4 playlist-block__item">
+                <span class="card-header playlist-block__header">Mes playlists</span>
+                    <ul class="list-group list-group-flush">
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') == true %}
+                            {% for playlist in playlists %}
+                                <a href="{{ path('playlist_show', {id: playlist.id}) }}">
+                                    <li class="list-group-item playlist-block__title">{{ playlist.name }}</li>
+                                </a>
+                            {% endfor %}
+                        {% else %}
+                            <a href="{{ path('app_login') }}">
+                                <li class="list-group-item playlist-block__title">Se connecter</li>
+                            </a>
+                        {% endif %}
+                    </ul>
+            </div>
+        </aside>
+    </main>
+{% endblock %}
+{% block scrollup %}
+    <a href="#header">
+        <img src="{{ asset('img/scroll-up.png') }}" alt="scroll up btn" class="scroll-up" width="40px" height="40px">
+    </a>
+{% endblock %}

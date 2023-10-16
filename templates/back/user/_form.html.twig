@@ -1,0 +1,43 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    <div class="my-4">
+        <div class="input-group input-group-outline my-2 is-filled">
+            {{ form_label(form.gamerTag) }}
+            {{ form_widget(form.gamerTag) }}
+            {{ form_errors(form.gamerTag) }}
+        </div>
+        <p class="form-text mb-0 help-text">{{ form_help(form.gamerTag) }}</p>
+    <div class="my-4">
+        <div class="input-group input-group-outline my-2 is-filled">
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email) }}
+            {{ form_errors(form.email) }}
+        </div>
+        <p class="form-text mb-0 help-text">{{ form_help(form.email) }}</p>
+    </div>
+    <div class="my-4">
+        {{ form_label(form.password) }}
+        {{ form_widget(form.password) }}
+        {{ form_errors(form.password) }}
+        <p class="form-text mb-0 help-text">{{ form_help(form.password) }}</p>
+    </div>
+    <div class="my-4">
+        <div class="input-group input-group-outline my-2 is-filled">
+            {{ form_label(form.roles) }}
+            {{ form_widget(form.roles) }}
+            {{ form_errors(form.roles) }}
+        </div>
+        <p class="form-text mb-0 help-text">{{ form_help(form.roles) }}</p>
+    </div>
+    <div class="my-4">
+        <div class="input-group input-group-outline my-2 is-filled">
+            {{ form_label(form.avatar) }}
+            {{ form_widget(form.avatar) }}
+            {{ form_errors(form.avatar) }}
+        </div>
+        <p class="form-text mb-0 help-text">{{ form_help(form.avatar) }}</p>
+    </div>
+    <div class="edit-button">
+        <button class="btn btn-outline-primary">{{ button_label|default('Save') }}</button>
+        <a href="{{ path('app_back_user_index') }}" class="btn btn-outline-primary">retour à la liste</a>
+    </div>   
+{{ form_end(form) }}

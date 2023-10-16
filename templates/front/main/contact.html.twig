@@ -1,0 +1,24 @@
+{% extends 'front/base_front.html.twig' %}
+{% block title %}Nous contacter{% endblock %}
+{% block body %}
+    </header>
+    <main>
+        <section class="contact">
+            <h2>Nous contacter</h2>
+            <h3>Bienvenue sur notre page de contact !</h3>
+            <p>
+                Si vous avez des questions, des commentaires, ou si vous souhaitez simplement entrer en contact avec nous, n'hésitez pas à utiliser l'adresse électronique suivante : <a href="mailto:admin@soundtrackify.com"><em>admin@soundtrackify.com</em></a>. <br>
+            </p> 
+            <p>
+                Nous sommes là pour vous aider et nous nous efforçons de répondre à toutes les demandes dans les plus brefs délais.
+                Nous vous remercions par avance pour vos retours et nous vous promettons une réponse rapide et pertinente à votre demande. Votre satisfaction est notre priorité, et nous sommes là pour vous accompagner à chaque étape de votre parcours avec nous.
+                Merci de nous faire confiance.
+            </p>
+        </section>  
+    </main>
+{% endblock %}
+{% block scrollup %}
+    <a href="#header">
+        <img src="{{ asset('img/scroll-up.png') }}" alt="scroll up btn" class="scroll-up" width="40px" height="40px">
+    </a>
+{% endblock %}

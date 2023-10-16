@@ -1,0 +1,27 @@
+{% extends 'front/base_front.html.twig' %}
+{% block title %}Ajout d'une musique{% endblock %}
+{% block body %}
+    </header>
+    <main>
+        <section class="small-content">
+            <div class="container bg-lighttt py-5">
+                {{ include('front/_flash_success_messages.html.twig') }}
+                <div class="row justify-content-center m-auto form-row">
+                    <div class="col-lg-8 col-md-12">
+                        <div class="detail-block row g-0 borderrr rrrounded overflow-hidden flex-md-row align-items-start mb-5 shadow-smmm position-relative music-form">
+                            <h2 class="mt-5 mb-4 form-page__title">Ajouter <i class="music-name_addtrack">{{ music.name }}</i> a ma playlist</h2>
+                            {{ form(form) }}
+                        </div>
+                        <div class="row user-btn__row mt-2">
+                            <a href="{{ path('playlist_createPlaylist') }}" type="button" class="btn btn-success user-btn__item">Créer une playlist</a>
+                            <a href="{{ path('album_show', {slug: album.slug}) }}" type="button" class="btn btn-dark user-btn__item">Retour à l'album</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+{% block script %}
+    <script src="{{asset('js/playlist-add.js')}}"></script>
+{% endblock %}

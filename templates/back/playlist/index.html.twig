@@ -1,0 +1,72 @@
+{% extends "back/base_back.html.twig" %}
+{% block title %}Liste des utilisateurs{% endblock %}
+{% block body %}
+  <!--    Page container start  -->
+  <div class="card my-4">
+    <div class="card-header p-0 mx-3 z-index-2">
+      <div class="d-flex header-list bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+        <h6 class="text-white text-capitalize ps-3">Les Playlists</h6>
+        <div class="createButton">
+          <a class="d-flex btn btn-outline-white text-end mb-0 mx-4" href="{{ path('app_back_playlist_new') }}">Create new</a>
+        </div>
+      </div>
+    </div>
+    <div class="card-body px-0 pb-2">
+      <div class="table-responsive p-0">
+        <table class="table align-items-center mb-0">
+          <thead>
+            <tr>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">id</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">name</th>
+              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">CreatedAt</th>
+              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">UpdatedAt</th>
+              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">actions</th>
+              <th class="text-secondary opacity-7"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <!--    table row start  -->
+            {% for playlist in playlists %}
+            <tr>
+              <td class="align-middle">
+                <span class="text-secondary text-xs font-weight-bold px-3">{{ playlist.id }}</span>
+              </td>
+              <td>
+                <div class="d-flex flex-column justify-content-center">
+                  <h6 class="mb-0 text-sm">{{ playlist.name }}</h6>
+                </div>
+              </td>
+              <td class="align-middle text-center">
+                <span class="text-secondary text-xs font-weight-bold">{{ playlist.createdAt ? playlist.createdAt|date('Y-m-d H:i:s') : '' }}</span>
+              </td>
+              <td class="align-middle text-center">
+                <span class="text-secondary text-xs font-weight-bold">{{ playlist.updatedAt ? playlist.updatedAt|date('Y-m-d H:i:s') : '' }}</span>
+              </td>
+              <td class="align-middle text-center">
+                <a class="material-icons opacity-10 px-2 icon-list" href="{{ path('app_back_playlist_show', {'id': playlist.id}) }}">
+                  <i>visibility</i>
+                </a>
+                <a class="material-icons opacity-10 px-2 icon-list" href="{{ path('app_back_playlist_edit', {'id': playlist.id}) }}">
+                  <i>edit</i>
+                </a>
+                <a class="material-icons opacity-10 px-2 icon-list">{{ include('back/playlist/_delete_form.html.twig') }}</a>
+            </tr>
+            <!--    table row end  -->
+            {% else %}
+              <tr>
+                <td colspan="8">no records found</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!--    Page container end   -->
+  <!--    Page nav start   -->
+  <div class="d-flex justify-content-center">
+    {% do playlists.setPageRange(5) %}
+    {{ knp_pagination_render(playlists,'back/pagination.html.twig') }}
+  </div>
+  <!--    Page nav end   -->
+{% endblock %}

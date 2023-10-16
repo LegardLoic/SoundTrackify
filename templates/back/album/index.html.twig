@@ -1,0 +1,89 @@
+{% extends "back/base_back.html.twig" %}
+{% block title %}Liste des Albums{% endblock %}
+{% block body %}
+    <!--    Page container start  -->
+    <div class="card my-4">
+        <div class="card-header p-0 mx-3 z-index-2">
+            <div class="d-flex header-list bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                <h6 class="text-white text-capitalize ps-3">Les Albums</h6>
+                <div class="createButton">
+                    <a class="d-flex btn btn-outline-white text-end mb-0 mx-4" href="{{ path('app_back_album_new') }}">Create new</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body px-0 pb-2">
+            <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                    <thead>
+                        <tr>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">id</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Poster</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Name</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">MainThemeUrl</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ReleaseDate</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">CreatedAt</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">UpdatedAt</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">actions</th>
+                            <th class="text-secondary opacity-7"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <!--    table row start  -->
+                    {% for album in albums %}
+                        <tr>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold">{{ album.id }}</span>
+                            </td>
+                            <td>
+                                <div class="d-flex px-2 py-1">
+                                    <div>
+                                        <img src="{{ album.poster }}" class="avatar avatar-sm me-3 border-radius-lg" alt="pochette de {{ album.name }}">
+                                    </div>
+                                </div>    
+                            </td>
+                            <td>
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h6 class="mb-0 text-sm">{{ album.name }}</h6>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="text-xs font-weight-bold mb-0">{{ album.mainThemeUrl|slice(0, 40) }}...</p>
+                            </td>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold">{{ album.releaseDate ? album.releaseDate|date('Y-m-d') : '' }}</span>
+                            </td>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold">{{ album.createdAt ? album.createdAt|date('Y-m-d H:i:s') : '' }}</span>
+                            </td>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold">{{ album.updatedAt ? album.updatedAt|date('Y-m-d H:i:s') : '' }}</span>
+                            </td>
+                            <td class="align-middle text-center">
+                                <a class="material-icons opacity-10 px-2 icon-list" href="{{ path('app_back_album_show', {'id': album.id}) }}">
+                                    <i>visibility</i>
+                                </a>
+                                <a class="material-icons opacity-10 px-2 icon-list" href="{{ path('app_back_album_edit', {'id': album.id}) }}">
+                                    <i>edit</i>
+                                </a>
+                                <a class="material-icons opacity-10 px-2 icon-list">{{ include('back/album/_delete_form.html.twig') }}</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="8">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    <!--    table row end  -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+        <!--    Page container end   -->
+        <!--    Page nav start   -->
+        <div class="d-flex justify-content-center">
+            {% do albums.setPageRange(8) %}
+            {{ knp_pagination_render(albums,'back/pagination.html.twig') }}
+        </div>
+        <!--    Page nav end   -->
+{% endblock %}

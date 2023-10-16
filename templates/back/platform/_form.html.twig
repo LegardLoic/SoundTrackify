@@ -1,0 +1,22 @@
+{{ form_start(form) }}
+    <div class="my-4">
+        <div class="input-group input-group-outline my-2 is-filled">
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+            {{ form_errors(form.name) }}
+        </div>
+        <p class="form-text mb-0 help-text">{{ form_help(form.name) }}</p>
+    </div>
+    <div class="my-4">
+        <div class="input-group input-group-outline my-2 is-filled">
+            {{ form_label(form.poster) }}
+            {{ form_widget(form.poster) }}
+            {{ form_errors(form.poster) }}
+        </div>
+        <p class="form-text mb-0 help-text">{{ form_help(form.poster) }}</p>
+    </div>
+    <div class="edit-button">
+        <button class="btn btn-outline-primary">{{ button_label|default('Save') }}</button>
+        <a href="{{ path('app_back_platform_index') }}" class="btn btn-outline-primary">retour à la liste</a>
+    </div>
+{{ form_end(form) }}

@@ -1,0 +1,196 @@
+{% extends 'back/base_back.html.twig' %}
+{% block title %}DashBoard SoundTrackify{% endblock %}
+{% block body %}
+<div class="page-header border-radius-xl mt-4">
+  <span class="mask  bg-gradient-primary  opacity-1"></span>
+</div>
+<div class="page-body mx-3">
+  <div class="row mb-2 mt-5 pt-5 px-3 dashboardbody">
+    <!-- Dashboard Card Start -->
+    <div class="col-xl-4 col-md-6 col-sm-12 mb-6">
+      <div class="card dashboard-card">
+        <div class="card-header p-3 pt-2">
+          <div class="icon-box icon-box-lg text-center mt-n4 position-absolute">
+            <i class="material-icons text-white opacity-10">sports_esports</i>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">{{ videogames|length }} enregistrements</p>
+            <h4 class="mb-0">Les Jeux-Videos</h4>
+          </div>
+        </div>
+        <h6 class="mb-0 mx-3 text-sm">Dernier ajout</h6>
+        <hr class="horizontal-dark-line my-0">
+        <div class="card-footer dashboardfooter-class p-3">
+          <div class="dashbordcard-footer d-flex">
+            {% for videogameDetail in videogame %}
+              <div class="dashbordcard-detail-footer d-flex">
+                <img src="{{ videogameDetail.poster }}" class="avatar avatar-sm me-3 border-radius-lg" alt="jacquette de {{ videogameDetail.name }}">
+                <p class="mb-0 text-sm">{{ videogameDetail.name|slice(0, 20) }}...<span class="text-successfont-weight-bolder fst-italic dashboard-date">le {{ videogameDetail.createdAt|date('d-m-Y') }}</span></p>
+              </div>
+              <a class="material-icons opacity-10" href="{{ path('app_back_videogame_show', {id: videogameDetail.id}) }}">
+                <i class="dashborad-view-icon">visibility</i>
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Dashboard Card End -->  
+
+    <!-- Dashboard Card Start -->
+    <div class="col-xl-4 col-md-6 col-sm-12 mb-6">
+      <div class="card dashboard-card">
+        <div class="card-header p-3 pt-2">
+          <div class="icon-box icon-box-lg text-center mt-n4 position-absolute">
+            <i class="material-icons text-white opacity-10">album</i>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">{{ albums|length }} enregistrements</p>
+            <h4 class="mb-0">Les Albums</h4>
+          </div>
+        </div>
+        <h6 class="mb-0 mx-3 text-sm">Dernier ajout</h6>
+        <hr class="horizontal-dark-line my-0">
+        <div class="card-footer dashboardfooter-class p-3">
+          <div class="dashbordcard-footer d-flex">
+            {% for albumDetail in album %}
+              <div class="dashbordcard-detail-footer d-flex">
+                <img src="{{ albumDetail.poster }}" class="avatar avatar-sm me-3 border-radius-lg" alt="jacquette de {{ albumDetail.name }}">
+                <p class="mb-0 text-sm">{{ albumDetail.name|slice(0, 20) }}...<span class="text-successfont-weight-bolder fst-italic dashboard-date">le {{ albumDetail.createdAt|date('d-m-Y') }}</span></p>
+              </div>
+              <a class="material-icons opacity-10" href="{{ path('app_back_album_show', {id: albumDetail.id}) }}">
+                <i class="dashborad-view-icon">visibility</i>
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Dashboard Card End --> 
+
+    <!-- Dashboard Card Start -->
+    <div class="col-xl-4 col-md-6 col-sm-12 mb-6">
+      <div class="card dashboard-card">
+        <div class="card-header p-3 pt-2">
+          <div class="icon-box icon-box-lg text-center mt-n4 position-absolute">
+            <i class="material-icons text-white opacity-10">music_note</i>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">{{ musics|length }} enregistrements</p>
+            <h4 class="mb-0">Les Musiques</h4>
+          </div>
+        </div>
+        <h6 class="mb-0 mx-3 text-sm">Dernier ajout</h6>
+        <hr class="horizontal-dark-line my-0">
+        <div class="card-footer dashboardfooter-class p-3 mt-2 mb-2">
+          <div class="dashbordcard-footer d-flex">
+            {% for musicDetail in music %}
+              <div class="dashbordcard-detail-footer d-flex">
+                <p class="mb-0 text-sm">{{ musicDetail.name|slice(0, 20) }}...<span class="text-successfont-weight-bolder fst-italic dashboard-date">le {{ musicDetail.createdAt|date('d-m-Y') }}</span></p>
+              </div>
+              <a class="material-icons opacity-10" href="{{ path('app_back_music_show', {id: musicDetail.id}) }}">
+                <i class="dashborad-view-icon">visibility</i>
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Dashboard Card End --> 
+
+    <!-- Dashboard Card Start -->
+    <div class="col-xl-4 col-md-6 col-sm-12 mb-6">
+      <div class="card dashboard-card">
+        <div class="card-header p-3 pt-2">
+          <div class="icon-box icon-box-lg text-center mt-n4 position-absolute">
+            <i class="material-icons text-white opacity-10">videogame_asset</i>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">{{ platforms|length }} enregistrements</p>
+            <h4 class="mb-0">Les Plateformes</h4>
+          </div>
+        </div>
+        <h6 class="mb-0 mx-3 text-sm">Dernier ajout</h6>
+        <hr class="horizontal-dark-line my-0">
+        <div class="card-footer dashboardfooter-class p-3">
+          <div class="dashbordcard-footer d-flex">
+            {% for platformDetail in platform %}
+              <div class="dashbordcard-detail-footer d-flex">
+                <img src="{{ platformDetail.poster }}" class="avatar avatar-sm me-3 border-radius-lg" alt="image de {{ platformDetail.name }}">
+                <p class="mb-0 text-sm">{{ platformDetail.name|slice(0, 20) }}<span class="text-successfont-weight-bolder fst-italic dashboard-date">le {{ platformDetail.createdAt|date('d-m-Y') }}</span></p>
+              </div>
+              <a class="material-icons opacity-10" href="{{ path('app_back_platform_show', {id: platformDetail.id}) }}">
+                <i class="dashborad-view-icon">visibility</i>
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Dashboard Card End --> 
+
+    <!-- Dashboard Card Start -->
+    <div class="col-xl-4 col-md-6 col-sm-12 mb-6">
+      <div class="card dashboard-card">
+        <div class="card-header p-3 pt-2">
+          <div class="icon-box icon-box-lg text-center mt-n4 position-absolute">
+            <i class="material-icons text-white opacity-10">person</i>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">{{ users|length }} enregistrements</p>
+            <h4 class="mb-0">Les Utilisateurs</h4>
+          </div>
+        </div>
+        <h6 class="mb-0 mx-3 text-sm">Dernier ajout</h6>
+        <hr class="horizontal-dark-line my-0">
+        <div class="card-footer dashboardfooter-class p-3">
+          <div class="dashbordcard-footer d-flex">
+            {% for userDetail in user %}
+              <div class="dashbordcard-detail-footer d-flex">
+                <img src="{{ userDetail.avatar.poster }}" class="avatar avatar-sm me-3 border-radius-lg" alt="avatar de {{ userDetail.gamerTag }}">
+                <p class="mb-0 text-sm">{{ userDetail.gamerTag }} <span class="text-successfont-weight-bolder fst-italic dashboard-date">le {{ userDetail.createdAt|date('d-m-Y') }}</span></p>
+              </div>
+              <a class="material-icons opacity-10" href="{{ path('app_back_user_show', {id: userDetail.id}) }}">
+                <i class="dashborad-view-icon">visibility</i>
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Dashboard Card End --> 
+
+    <!-- Dashboard Card Start -->
+    <div class="col-xl-4 col-md-6 col-sm-12 mb-6">
+      <div class="card dashboard-card">
+        <div class="card-header p-3 pt-2">
+          <div class="icon-box icon-box-lg text-center mt-n4 position-absolute">
+            <i class="material-icons text-white opacity-10">playlist_add</i>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">{{ playlists|length }} enregistrements</p>
+            <h4 class="mb-0">Les Playlists</h4>
+          </div>
+        </div>
+        <h6 class="mb-0 mx-3 text-sm">Dernier ajout</h6>
+        <hr class="horizontal-dark-line my-0">
+        <div class="card-footer dashboardfooter-class p-3">
+          <div class="dashbordcard-footer d-flex">
+            {% for playlistDetail in playlist %}
+              <div class="dashbordcard-detail-footer d-flex">
+                <img src="{{ playlistDetail.user.avatar.poster }}" class="avatar avatar-sm me-3 border-radius-lg" alt="avatar de {{ playlistDetail.user.gamerTag }}">
+                <p class="mb-0 text-sm">{{ playlistDetail.name }} <span class="text-successfont-weight-bolder fst-italic dashboard-date">le {{ playlistDetail.createdAt|date('d-m-Y') }}</span> par {{ playlistDetail.user.gamerTag }}</span></p>
+              </div>
+              <a class="material-icons opacity-10" href="{{ path('app_back_playlist_show', {id: playlistDetail.id}) }}">
+                <i class="dashborad-view-icon">visibility</i>
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Dashboard Card End --> 
+  </div>
+</div>
+<!--    Page container end   -->
+{% endblock %}

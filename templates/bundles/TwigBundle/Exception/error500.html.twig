@@ -1,0 +1,20 @@
+{% extends 'front/base_front.html.twig' %}
+{% block title %}Internal Server Error{% endblock %}
+{% block body %}
+    </header>
+    <main>
+        <section class="small-content">
+            <div class="container bg-lighttt py-5">
+                <div class="row justify-content-center m-auto form-row">
+                    <div class="col-lg-8 col-md-12">
+                        <div class="detail-block row g-0 borderrr rrrounded overflow-hidden flex-md-row align-items-start mb-2 shadow-smmm position-relative">
+                            <h2 class="my-4 form-page__title">Ohoh, nous rencontrons une erreur</h2>
+                            <p align="center" class="mb-3">HTTP ERROR 500</p>
+                        </div>
+                        <a href="{{ path('main_home') }}" type="button" class="btn btn-success user-form__button mb-4">Retour à l'accueil</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

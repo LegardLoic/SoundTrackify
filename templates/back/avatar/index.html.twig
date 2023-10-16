@@ -1,0 +1,81 @@
+{% extends "back/base_back.html.twig" %}
+{% block title %}Liste des Avatars{% endblock %}
+{% block body %}
+  <!--    Page container start  -->
+  <div class="card my-4">
+    <div class="card-header p-0 mx-3 z-index-2">
+      <div class="d-flex header-list bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+        <h6 class="text-white text-capitalize ps-3">Les Avatars</h6>
+        <div class="createButton">
+          <a class="d-flex btn btn-outline-white text-end mb-0 mx-4" href="{{ path('app_back_avatar_new') }}">Create new</a>
+        </div>
+      </div>
+    </div>
+    <div class="card-body px-0 pb-2">
+      <div class="table-responsive p-0">
+        <table class="table align-items-center mb-0">
+          <thead>
+            <tr>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">id</th>
+              <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Poster</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Name</th>
+              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">CreatedAt</th>
+              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">UpdatedAt</th>
+              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">actions</th>
+              <th class="text-secondary opacity-7"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <!--    table row start  -->
+            {% for avatar in avatars %}
+            <tr>
+              <td class="align-middle text-center">
+                <span class="text-secondary text-xs font-weight-bold">{{ avatar.id }}</span>
+              </td>
+              <td>
+                <div class="d-flex px-2 py-1">
+                  <div>
+                    <img src="{{ avatar.poster }}" class="avatar avatar-sm me-3 border-radius-lg" alt="image de jeu">
+                  </div>
+                </div>    
+              </td>
+              <td>
+                <div class="d-flex flex-column justify-content-center">
+                  <h6 class="mb-0 text-sm">{{ avatar.name }}</h6>
+                </div>
+              </td>
+              <td class="align-middle text-center">
+                <span class="text-secondary text-xs font-weight-bold">{{ avatar.createdAt ? avatar.createdAt|date('Y-m-d H:i:s') : '' }}</span>
+              </td>
+              <td class="align-middle text-center">
+                <span class="text-secondary text-xs font-weight-bold">{{ avatar.updatedAt ? avatar.updatedAt|date('Y-m-d H:i:s') : '' }}</span>
+              </td>
+              <td class="align-middle text-center">
+                <a class="material-icons opacity-10 px-2 icon-list" href="{{ path('app_back_avatar_show', {'id': avatar.id}) }}">
+                  <i>visibility</i>
+                </a>
+                <a class="material-icons opacity-10 px-2 icon-list" href="{{ path('app_back_avatar_edit', {'id': avatar.id}) }}">
+                  <i>edit</i>
+                </a>
+                <a class="material-icons opacity-10 px-2 icon-list">{{ include('back/avatar/_delete_form.html.twig') }}</a>
+              </td>
+            </tr>
+            <!--    table row end  -->
+            {% else %}
+              <tr>
+                <td colspan="8">no records found</td>
+              </tr>
+            {% endfor %}           
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!--    Page container end   -->
+  <!--    Page nav start   -->
+  <div class="d-flex justify-content-center">
+    {% do avatars.setPageRange(15) %}
+    {{ knp_pagination_render(avatars,'back/pagination.html.twig') }}
+  </div>
+  <!--    Page nav end   -->
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'front/base_front.html.twig' %}
+{% block title %}Résultat de recherche{% endblock %}
+{% block body %}
+    </header>
+    <main>
+        <h2 class="search-container__title">Votre recherche pour "{{query}}"</h2>
+        <section class="card-section section-padding">
+            <div class="card-section__items col-lg-8 col-12 mt-3 mx-auto">
+                {% for index, videogame in videogames %}
+	                <div class="list-block custom-block custom-block-topics-listing bg-white shadow-lg mb-5">
+                        <a href="{{ path('videogame_show', {slug: videogame.slug}) }}" class="more"> 
+                            <div class="d-flex">
+                                <div class="list-card__item">
+                                    <img src="{{ videogame.poster }}" class="list-img list-card__img custom-block-image img-fluid" alt="jacquette de {{ videogame.name }}">
+                                </div>
+                                <div class="list-block__container custom-block-topics-listing-info d-flex">
+                                    <div class="list-item__description">
+                                        <h3 class="mb-2">{{ videogame.name }}</h3>
+                                        <p class="mb-0">Année : {{ videogame.releaseDate|date('Y') }}</p>    
+                                    </div>    
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+{% endblock %}
+{% block scrollup %}
+    <a href="#header">
+        <img src="{{ asset('img/scroll-up.png') }}" alt="scroll up btn" class="scroll-up" width="40px" height="40px">
+    </a>
+{% endblock %}  

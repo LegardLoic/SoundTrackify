@@ -1,0 +1,85 @@
+{% extends "back/base_back.html.twig" %}
+{% block title %}Liste des Jeux-Videos{% endblock %}
+{% block body %}
+  <div class="card my-4">
+    <div class="card-header p-0 mx-3 z-index-2">
+      <div class="d-flex header-list bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+        <h6 class="text-white text-capitalize ps-3">Les jeux-videos</h6>
+        <div class="createButton">
+          <a class="d-flex btn btn-outline-white text-end mb-0 mx-4" href="{{ path('app_back_videogame_new') }}">Create new</a>
+        </div>
+      </div>
+    </div>
+    <div class="card-body px-0 pb-2">
+      <div class="table-responsive p-0">
+        <table class="table align-items-center mb-0">
+          <thead>
+            <tr>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">id</th>
+              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Poster</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Name</th>
+              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ReleaseDate</th>
+              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">CreatedAt</th>
+              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">UpdatedAt</th>
+              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Resume</th>
+              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">actions</th>
+              <th class="text-secondary opacity-7"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <!--    table row start  -->
+            {% for videogame in videogames %}
+              <tr>
+                <td class="align-middle text-center">
+                  <span class="text-secondary text-xs font-weight-bold">{{ videogame.id }}</span>
+                </td>
+                <td>
+                  <div class="d-flex px-2 py-1">
+                    <div>
+                      <img src="{{ videogame.poster }}" class="avatar avatar-sm me-3 border-radius-lg" alt="jacquette de {{ videogame.name }}">
+                    </div>
+                  </div>    
+                </td>
+                <td>
+                  <div class="d-flex flex-column justify-content-center">
+                    <h6 class="mb-0 text-sm">{{ videogame.name }}</h6>
+                  </div>
+                </td>
+                <td class="align-middle text-center">
+                  <span class="text-secondary text-xs font-weight-bold">{{ videogame.releaseDate ? videogame.releaseDate|date('Y-m-d') : '' }}</span>
+                </td>
+                <td class="align-middle text-center">
+                  <span class="text-secondary text-xs font-weight-bold">{{ videogame.createdAt ? videogame.createdAt|date('Y-m-d H:i:s') : '' }}</span>
+                </td>
+                <td class="align-middle text-center">
+                  <span class="text-secondary text-xs font-weight-bold">{{ videogame.updatedAt ? videogame.updatedAt|date('Y-m-d H:i:s') : '' }}</span>
+                </td>
+                <td>
+                  <p class="text-xs font-weight-bold mb-0">{{ videogame.resume|slice(0, 40) }}...</p>
+                </td>
+                <td class="align-middle text-center">
+                  <a class="material-icons opacity-10 px-2 icon-list" href="{{ path('app_back_videogame_show', {'id': videogame.id}) }}">
+                    <i>visibility</i>
+                  </a>
+                  <a class="material-icons opacity-10 px-2 icon-list" href="{{ path('app_back_videogame_edit', {'id': videogame.id}) }}">
+                    <i>edit</i>
+                  </a>
+                  <a class="material-icons opacity-10 px-2 icon-list">{{ include('back/videogame/_delete_form.html.twig') }}</a>
+                </td>
+              </tr>
+            {% else %}
+              <tr>
+                <td colspan="8">no records found</td>
+              </tr>
+            {% endfor %}
+            <!--    table row end  -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    {% do videogames.setPageRange(15) %}
+    {{ knp_pagination_render(videogames,'back/pagination.html.twig') }}
+  </div>
+{% endblock %}

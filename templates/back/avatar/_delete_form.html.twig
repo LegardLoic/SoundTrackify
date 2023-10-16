@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_back_avatar_delete', {'id': avatar.id}) }}" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer {{ avatar.name }} ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ avatar.id) }}">
+    <button class="btn p-0 m-0"><i class="material-icons btn-lg opacity-10">delete</i></button>
+</form>

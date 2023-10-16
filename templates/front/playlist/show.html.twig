@@ -1,0 +1,58 @@
+{% extends 'front/base_front.html.twig' %}
+{% block title %}{{ playlist.name }}{% endblock %}
+{% block body %}
+    </header>
+    <main>
+        <section class="user">
+            {{ include('front/_flash_success_messages.html.twig') }}
+            <h2 class="form-page__title">Détail de <strong>{{playlist.name}}</strong></h2>
+            <div class="playlist-player">
+                <audio id="player" controls class="playlist-player__item">
+                    <source id="audioSource" src="" type="audio/mp3">
+                        Votre navigateur ne prend pas en charge l'élément audio.
+                </audio>
+                <div id="scrollable" class="scroll-text">
+                    <p id="nowPlaying" class="list__now-playing mb-5"><span id="trackName"></span></p>
+                </div>
+            </div>
+            <div class="playlist-button">
+                <button id="prev-button"><img src="{{asset('img/playlist-previous.svg')}}" alt="Previous button for playlist player"></button>
+                <button id="next-button"><img src="{{asset('img/playlist-next.svg')}}" alt="Next button for playlist player"></button>
+                <button id="shuffle-button"><img src="{{asset('img/playlist-shuff-off.svg')}}" alt="Shuffle button for playlist player" class="shuffle-img"></button>
+            </div>
+            <div class="detail-list playlist-show">
+                <table class="detail-list__table">
+                    <thead>
+                        <th scope="col" class="th-td__playlist">Titre</th>
+                        <th scope="col" class="th-td__playlist">Album</th>
+                        <th scope="col" class="th-td__playlist">Durée</th>
+                        <th scope="col" class="th-td__playlist">Supprimer de la playlist</th>
+                        <th scope="col" class="th-td__playlist">Lecture</th>
+                    </thead>
+                    {% for musicToPlaylist in musicToPlaylists %}
+                        <tr class="music-table__row">
+                            <th scope="row" class="th-td__playlist">{{ musicToPlaylist.name }}</th>
+                            <td class="th-td__playlist"><a href="{{ path('album_show', {slug: musicToPlaylist.getAlbum.slug}) }}">{{ musicToPlaylist.getAlbum.name|u.truncate(15, '...', false) }}</a></td>
+                            <td class="th-td__playlist">{{ musicToPlaylist.time|date(' i:s') }}</td>
+                            <td class="th-td__playlist"><a href="{{ path('playlist_removeTrackFromPlaylist', {'playlistId': playlist.id, 'musicId': musicToPlaylist.id}) }}" onclick="return confirm('Etes-vous sûr de vouloir supprimer {{musicToPlaylist.name}} ?')"  method="post"><img src="{{ asset('img/playlist-delete.svg') }}" alt="add music to playlist button" class="music-table__add"></a></td>
+                            <td class="th-td__playlist"><button class="play-button" data-url="{{ musicToPlaylist.link }}" data-name="{{ musicToPlaylist.name }} | album : {{ musicToPlaylist.getAlbum.name }}"><img src="{{ asset('img/play.svg') }}" alt="add music to playlist button" class=""></button></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="row user-btn__row pt-5">
+                <a href="{{ path('playlist_edit', {'id': playlist.id}) }}" type="button" class="btn btn-primary user-btn__item">Modifier {{playlist.name}}</a>
+                <a href="{{ path('playlist_delete', {'id': playlist.id}) }}" type="button" class="btn btn-danger user-btn__item" onclick="return confirm('Etes-vous sûr de vouloir supprimer {{playlist.name}} ?')">Supprimer {{playlist.name}}</a>
+                <a href="{{ path('playlist_list') }}" type="button" class="btn btn-success user-btn__item">Retour</a>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+{% block script %}
+    <script>
+        const shuffleOnImg = "{{asset('img/playlist-shuff-on.svg')}}"
+        const shuffleOffImg = "{{asset('img/playlist-shuff-off.svg')}}"
+    </script>
+    <script src="{{asset('js/mp3-player.js')}}"></script>
+    <script src="{{asset('js/mp3-player-text.js')}}"></script>
+{% endblock %}

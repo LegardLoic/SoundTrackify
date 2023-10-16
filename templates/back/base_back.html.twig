@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon Back -->
+    <link rel="icon" type="image/png" href="{{ asset('favicon-back.png') }}">
+    <title>Dashboard SoundTrackify &ndash; {% block title %}{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="{{ asset('css/back/style.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <!-- jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Select2 CSS & JS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <!-- Bootstrap Datepicker CSS & JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+  </head>
+  <body class="body">
+    <nav class="navbar d-none d-lg-block mx-2" id="sidenav-main">
+      <div class="navbar-head px-3">
+        <img class="nav-logo mx-2 my-2" src="{{ asset('img/back/logo2.png') }}" alt="main_logo">
+        <span class="ms-1 text-white nav-title">Soundtrackify</span>
+        <i class="material-icons opacity-5 position-absolute end-0 top-0 text-white d-lg-none p-3" id="iconSidenav">close</i>
+      </div>
+      <hr class="horizontal-light-line mt-0 mb-2">
+      <div class="nav-container">
+        <div class="">
+          <ul class="scrollable-nav">
+            <li class="nav-link">
+              <a href="{{ path('app_back_main') }}">
+                <div class="text-white nav-button {% if app.request.pathInfo ends with '/admin/' %}bg-gradient-primary{% else %}{% endif %}">
+                  <i class="material-icons opacity-10 pe-2">build</i>
+                  <span class="nav-link-text ms-1">Accueil BackOffice</span>
+                </div>
+              </a> 
+            </li>
+
+            <li class="nav-link">
+              <a href="{{ path('main_home') }}">
+                <div class="text-white nav-button">
+                  <i class="material-icons opacity-10 pe-2">home</i>
+                  <span class="nav-link-text ms-1">Retour au site</span>
+                </div>
+              </a> 
+            </li>
+
+            <li class="nav-link">
+              <h6 class="ps-2 my-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Données du site</h6>
+            </li>
+
+            <li class="nav-link">
+              <a href="{{ path('app_back_videogame_index') }}">
+                <div class="text-white nav-button {% if app.request.pathInfo starts with '/admin/videogame' %}bg-gradient-primary{% else %}{% endif %}">
+                  <i class="material-icons opacity-10 pe-2">sports_esports</i>
+                  <span class="nav-link-text ms-1">Les Jeux-Videos</span>
+                </div>
+              </a> 
+            </li>
+
+            <li class="nav-link">
+              <a href="{{ path('app_back_album_index') }}">
+                <div class="text-white nav-button {% if app.request.pathInfo starts with '/admin/album' %}bg-gradient-primary{% else %}{% endif %}">
+                  <i class="material-icons opacity-10 pe-2">album</i>
+                  <span class="nav-link-text ms-1">Les Albums</span>
+                </div>
+              </a> 
+            </li>
+
+            <li class="nav-link">
+              <a href="{{ path('app_back_music_index') }}">
+                <div class="text-white nav-button {% if app.request.pathInfo starts with '/admin/music' %}bg-gradient-primary{% else %}{% endif %}">
+                  <i class="material-icons opacity-10 pe-2">music_note</i>
+                  <span class="nav-link-text ms-1">Les Musiques</span>
+                </div>
+              </a> 
+            </li>
+
+            <li class="nav-link">
+              <a href="{{ path('app_back_platform_index') }}">
+                <div class="text-white nav-button {% if app.request.pathInfo starts with '/admin/platform' %}bg-gradient-primary{% else %}{% endif %}">
+                  <i class="material-icons opacity-10 pe-2">videogame_asset</i>
+                  <span class="nav-link-text ms-1">Les Plateformes</span>
+                </div>
+              </a> 
+            </li>
+
+            <li class="nav-link">
+              <h6 class="ps-2 my-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Données Utilisateurs</h6>
+            </li>
+
+            <li class="nav-link">
+              <a href="{{ path('app_back_user_index') }}">
+                <div class="text-white nav-button {% if app.request.pathInfo starts with '/admin/user' %}bg-gradient-primary{% else %}{% endif %}">
+                  <i class="material-icons opacity-10 pe-2">person</i>
+                  <span class="nav-link-text ms-1">Les Utilisateurs</span>
+                </div>
+              </a> 
+            </li>
+
+            <li class="nav-link">
+              <a href="{{ path('app_back_playlist_index') }}">
+                <div class="text-white nav-button {% if app.request.pathInfo starts with '/admin/playlist' %}bg-gradient-primary{% else %}{% endif %}">
+                  <i class="material-icons opacity-10 pe-2">playlist_add</i>
+                  <span class="nav-link-text ms-1">Les Playlists</span>
+                </div>
+              </a> 
+            </li>
+
+            <li class="nav-link">
+              <a href="{{ path('app_back_avatar_index') }}">
+                <div class="text-white nav-button {% if app.request.pathInfo starts with '/admin/avatar' %}bg-gradient-primary{% else %}{% endif %}">
+                  <i class="material-icons opacity-10 pe-2">account_circle</i>
+                  <span class="nav-link-text ms-1">Les Avatars</span>
+                </div>
+              </a> 
+            </li>
+          </ul>
+        </div>
+        <div class="nav-footer">
+          <div class="mx-3">
+            <a class="btn bg-gradient-primary w-100 text-white border-0 py-2" href="{{ path('app_logout') }}" type="button">DECONNEXION</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid mx-0 main-container">
+      <div class="row">
+        <div class="col-sm-12 mt-2">
+          <a href="javascript:;" class="nav-link-burger p-0 text-body opacity-10 d-lg-none mt-2 text-end d-flex burger" id="iconNavbarSidenav">
+            <div class="sidenav-toggler-inner">
+              <i class="sidenav-toggler-line"></i>
+              <i class="sidenav-toggler-line"></i>
+              <i class="sidenav-toggler-line"></i>
+            </div>
+          </a>
+          {{ include('front/_flash_success_messages.html.twig') }}
+          {% block body %}{% endblock %}
+          <footer class="footer py-4  ">
+            <div class="container-fluid">
+              <div class="row align-items-center justify-content-lg-between">
+                <div class="col-lg-6 mb-lg-0 mb-4">
+                  <div class="copyright text-center text-sm text-muted text-lg-start">
+                      © <script>document.write(new Date().getFullYear())</script>,made with <i class="fa fa-heart"></i> by
+                      <bold class="font-weight-bold"> Emilie, Gabriel and Loïc</bold> for a better web.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </div>
+<!--   Core JS Files   -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/back/nav-animation.js') }}"></script>
+    <script src="{{ asset('js/back/custom.js') }}"></script>
+    <script src="{{ asset('js/back/form-validation-register.js') }}"></script>
+    <script src="{{ asset('js/back/form-validation-edit.js') }}"></script>
+    <script src="{{ asset('js/back/select2.js') }}"></script>
+    <script src="{{asset('js/add-flash.js')}}"></script>
+    <script>var apiMusicsUrl = "{{ path('app_back_api_musics') }}";</script>
+    {% block script %}{% endblock %}
+  </body>
+</html>

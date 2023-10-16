@@ -1,0 +1,20 @@
+{% extends 'front/base_front.html.twig' %}
+{% block title %}Créer une playlist{% endblock %}
+{% block body %}
+    </header>
+    <main>
+        <section class="small-content">
+            <div class="container bg-lighttt py-5">
+                <div class="row justify-content-center m-auto form-row">
+                    <div class="col-lg-8 col-md-12">
+                        <div class="detail-block row g-0 borderrr rrrounded overflow-hidden flex-md-row align-items-start mb-2 shadow-smmm position-relative">
+                            <h2 class="my-4 form-page__title">Créer une nouvelle playlist</h2>
+                            {{ form(form) }}
+                        </div>
+                        <a href="{{ path('playlist_list') }}" type="button" class="btn btn-success user-form__button mb-4">Retour</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

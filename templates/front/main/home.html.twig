@@ -1,0 +1,65 @@
+{% extends 'front/base_front.html.twig' %}
+{% block title %}Accueil{% endblock %}
+{% block body %}
+        <section class="baseline">
+            <h2>Les <strong>musiques de vos jeux</strong> préférés</h2>
+            <p>A écouter sans modération!</p>
+            {{ form_start(form) }}
+            {{ form_widget(form, {'attr': {'class': 'input-group input-group-lg search-form'}}) }}
+            {{ form_end(form) }}
+        </section>
+    </header>
+    <main>
+        <section class="newest-games card-section">
+            <h3 class="card-section__title">Derniers jeux ajoutés</h3>
+            <div class="card-section__items">
+                {% for videogame in videogames %}
+                    <div class="card-item col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
+                        <div class="custom-block custom-block-main shadow-lg">
+                            <a href="{{ path('videogame_show', {slug: videogame.slug}) }}">
+                                <img src="{{ videogame.poster }}" class="bd-placeholder-img card-img-top" alt="Jacquette de {{ videogame.name }}">
+                                <div class="card-footer-home">
+                                    <h4 class="text-center home-name-title">{{ videogame.name }}</h4>
+                                    <div class="text-center">
+                                        <small class="text-body-secondary text-dark">Année {{ videogame.releaseDate|date('Y') }}</small>
+                                    </div>
+                                </div>     
+                            </a>
+                        </div>
+                    </div>     
+                {% endfor %}
+            </div>
+            <a href="{{ path('videogame_list') }}" class="see-more">Voir plus de jeux</a>
+        </section>
+        <div class="break"></div>
+        <section class="random-soundtracks card-section">
+            <h3 class="card-section__title">4 albums aléatoires</h3>
+            <div class="card-section__items"> 
+                {% for randomAlbum in randomAlbums %}
+                    <div class="card-item col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
+                        <div class="custom-block custom-block-main shadow-lg">
+                            <a class="link-card-home" href="{{ path('album_show', {slug: randomAlbum.slug}) }}">
+                                <img src="{{ randomAlbum.poster }}" class="bd-placeholder-img card-img-top" alt="Jacquette de {{ randomAlbum.name }}">
+                                <div class="card-footer-home">
+                                    <h4 class="text-center home-name-title">{{ randomAlbum.name }}</h4>
+                                    <div class="text-center">
+                                        <small class="text-body-secondary text-dark">{{ randomAlbum.musics|length }} tracks</small>
+                                   </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <a href="{{ path('album_list') }}" class="see-more">Voir plus d'albums</a>
+        </section>
+    </main>
+{% endblock %}
+{% block scrollup %}
+    <a href="#header">
+        <img src="{{ asset('img/scroll-up.png') }}" alt="scroll up btn" class="scroll-up" width="40px" height="40px">
+    </a>
+{% endblock %}
+{% block script %}
+    <script src="{{asset('js/search-toolbar.js')}}"></script>
+{% endblock %}

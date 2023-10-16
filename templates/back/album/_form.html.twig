@@ -1,0 +1,45 @@
+{{ form_start(form) }}
+    <div class="my-4">
+        <div class="input-group input-group-outline my-2 is-filled">
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+            {{ form_errors(form.name) }}
+        </div>
+        <p class="form-text mb-0 help-text">{{ form_help(form.name) }}</p>
+    </div>
+    <div class="my-4">
+        <div class="input-group input-group-outline my-2 is-filled">
+            {{ form_label(form.poster) }}
+            {{ form_widget(form.poster) }}
+            {{ form_errors(form.poster) }}
+        </div>
+        <p class="form-text mb-0 help-text">{{ form_help(form.poster) }}</p>
+    </div>
+    <div class="my-4">
+        <div class="input-group input-group-date input-group-outline my-2 is-filled">
+            {{ form_row(form.releaseDate, {'attr': {'class': 'datepicker'}}) }}
+            {{ form_errors(form.releaseDate) }}
+        </div>
+    </div>
+    <div class="my-4">
+        <div class="input-group input-group-outline my-1 is-filled">
+            {{ form_label(form.mainThemeUrl) }}
+            {{ form_widget(form.mainThemeUrl) }}
+            {{ form_errors(form.mainThemeUrl) }}   
+        </div>
+        <p class="form-text mb-0 help-text">{{ form_help(form.mainThemeUrl) }}</p>
+    </div>
+    <div class="my-4">
+        <div class="input-group input-group-append input-group-outline my-2 is-filled">
+            {{ form_label(form.videogame) }}
+            {{ form_widget(form.videogame) }}
+            {{ form_errors(form.videogame) }}
+        </div>
+        <p class="form-text mb-0 help-text">{{ form_help(form.videogame) }}</p>
+    </div>
+    <div class="edit-button">
+        <button class="btn btn-outline-primary">{{ button_label|default('Save') }}</button>
+        <a href="{{ path('app_back_album_index') }}" class="btn btn-outline-primary">retour à la liste</a>
+    </div>   
+{{ form_end(form) }}
+

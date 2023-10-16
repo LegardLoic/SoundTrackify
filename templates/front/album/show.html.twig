@@ -1,0 +1,87 @@
+{% extends 'front/base_front.html.twig' %}
+{% block title %}{{ album.name }}{% endblock %}
+{% block body %}
+    </header>
+    <main>
+        <div class="container bg-lighttt pt-5">
+            {{ include('front/_flash_success_messages.html.twig') }}
+            <div class="row row-custom">
+                <section class="col-lg-9 col-md-12">
+                    <div class="detail-block row g-0 borderrr rrrounded overflow-hidden flex-md-row align-items-start mb-4 shadow-smmm position-relative">
+                        <div class="col-4 movie__poster img-thumbnail detail-img__block" style="background-image: url('');">
+                            <img src= "{{ album.poster }}" class="img-fluid detail-img__item" alt="Jacquette de {{ album.name }}">
+                        </div>
+                        <div class="detail-block__content">
+                            <h2>{{ album.name }}</h2>
+                            <h3>{{ album.musics|length }} morceaux</h3>
+                            <div class="album-player">
+                                <audio id="player" controls class="detail-player__item">
+                                    <source id="audioSource" src="" type="audio/mp3">
+                                        Votre navigateur ne prend pas en charge l'élément audio.
+                                </audio>
+                                <div id="scrollable" class="scroll-text-album">
+                                    <p id="nowPlaying" class="list__now-playing-show mb-4"><span id="trackName"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail-list">
+                            <table class="detail-list__table">
+                                <thead>
+                                    <th scope="col">Titre</th>
+                                    <th scope="col">Durée</th>
+                                    <th scope="col">Ajouter à une playlist</th>
+                                    <th scope="col">Lecture</th>
+                                </thead>
+                                {% for music in album.musics %}
+                                    <tr class="music-table__row">
+                                        <th scope="row">{{ music.name }}</th>
+                                        <td>{{ music.time|date(' i:s') }}</td>
+                                        <td>
+                                            <a href="{{ path('playlist_addTrackToPlaylist',{'albumSlug': album.slug, 'id': music.id}) }}" method="post">
+                                                <img src="{{ asset('img/playlist-add.svg') }}" alt="add music to playlist button" class="music-table__add">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <button class="play-button" data-url="{{ music.link }}" data-name="{{ music.name }}">
+                                                <img src="{{ asset('img/play.svg') }}" alt="add music to playlist button" class="">
+                                            </button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                <aside class="col-lg-3 col-md-12 playlist-block">
+                    <!-- emmet : (div.card.mb-4>div.card-header+ul.list-group.list-group-flush>li.list-group-item*4>a)*2 -->
+                    <div class="card mb-4 playlist-block__item">
+                        <span class="card-header playlist-block__header">Mes playlists</span>
+                        <ul class="list-group list-group-flush">
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') == true %}
+                                {% for playlist in playlists %}
+                                    <a href="{{ path('playlist_show', {id: playlist.id}) }}">
+                                        <li class="list-group-item playlist-block__title">{{ playlist.name }}</li>
+                                    </a>
+                                {% endfor %}
+                            {% else %}
+                                <a href="{{ path('app_login') }}">
+                                    <li class="list-group-item playlist-block__title">Se connecter</li>
+                                </a>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+{% block scrollup %}
+    <a href="#header">
+        <img src="{{ asset('img/scroll-up.png') }}" alt="scroll up btn" class="scroll-up" width="40px" height="40px">
+    </a>
+{% endblock %}
+{% block script %}
+    <script src="{{asset('js/mp3-player-without-button.js')}}"></script>
+    <script src="{{asset('js/mp3-player-text.js')}}"></script>
+
+{% endblock %}

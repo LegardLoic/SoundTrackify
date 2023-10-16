@@ -1,0 +1,30 @@
+{% extends 'front/base_front.html.twig' %}
+{% block title %}Insription{% endblock %}
+{% block body %}
+    </header>
+    <main>
+        <div class="container bg-lighttt py-5">
+            <div class="row justify-content-center m-auto form-row">
+                <div class="col-lg-8 col-md-12">
+                    <div class="detail-block row g-0 borderrr rrrounded overflow-hidden flex-md-row align-items-start mb-4 shadow-smmm position-relative">
+                        <h2 class="my-4 form-page__title">Inscris-toi pour commencer à créer tes playlists</h2>
+                        {{ form(form) }}
+                        <p class="user-form__about">En cliquant sur "S'enregistrer", tu acceptes les 
+                            <a href="{{ path('main_legalNotice') }}" class="user-form__links">Conditions générales d'utilisation</a> et la 
+                            <a href="{{ path('main_personalData') }}" class="user-form__links">Politique de protection des données</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+{% block scrollup %}
+    <a href="#header">
+        <img src="{{ asset('img/scroll-up.png') }}" alt="scroll up btn" class="scroll-up" width="40px" height="40px">
+    </a>
+{% endblock %}
+{% block script %}
+    <script src="{{asset('js/user-form.js')}}"></script>
+    <script src="{{asset('js/form-validation-register.js')}}"></script>
+{% endblock %}

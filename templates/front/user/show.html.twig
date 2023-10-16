@@ -1,0 +1,52 @@
+{% extends 'front/base_front.html.twig' %}
+{% block title %}Mon compte{% endblock %}
+{% block body %}
+  </header>
+  <main>
+    <section class="user">
+      {{ include('front/_flash_success_messages.html.twig') }}
+      <h2>Mon compte</h2>
+      <div class="row">
+		    <div class="col-lg-2 col-md-3 col-sm-5 col-5">
+		    	<div class="card">
+		    		<img class="card-img-top" src="{{app.user.avatar.poster}}" alt="Jacquette de {{app.user.gamertag}}">
+		    		<div class="card-block">
+		    		  <h4 class="card-title user-card__title">{{app.user.gamertag}}</h4>
+		    		</div>
+		    		<div class="card-footer">
+              <div class="user-card__text">
+		    				{% if app.user.roles[0] == 'ROLE_ADMIN' %}
+                  <strong class="user-card__text">Administrateur</strong>
+                {% else %}
+                  <strong class="user-card__text">Utilisateur</strong>                     
+                {% endif %}
+		    			</div>
+		    		</div>
+		    	</div>
+		    </div>
+		    <div class="col-lg-10 col-md-9 col-sm-7 col-7 m-auto">
+          <h3>Informations relatives à mon profil</h2>
+          <table class="detail-account user-table">
+            <tbody class="user-table__body">
+              <tr class="user-table__row">
+                <td class="user-table__left">Pseudo <span class="ico_user"></span></td>
+                <td class="user-table__right"><strong>{{app.user.gamertag}}</strong></td>
+              </tr>
+              <tr class="user-table__row">
+                <td class="user-table__left">E-mail <span class="ico_history"></span></td>
+                <td class="user-table__right"><strong>{{app.user.email}}</strong></td>
+              </tr>
+              <tr class="user-table__row">
+                <td class="user-table__left">Date d'inscription <span class="ico_list-ul"></span></td>
+                <td class="user-table__right"><strong>{{app.user.createdAt|date('d/m/Y')}}</strong></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="row user-btn__row mt-2">
+            <a href="{{ path('user_edit', {slug: app.user.slug}) }}" type="button" class="btn btn-success user-btn__item">Modifier mon profil</a>
+            <a href="{{ path('user_delete', {slug: app.user.slug}) }}" type="button" class="btn btn-danger user-btn__item" onclick="return confirm('Etes-vous sûr de vouloir supprimer votre compte ?')">Supprimer mon profil</a>
+        </div> 
+      </div>    
+    </section>            
+  </main>
+{% endblock %}
